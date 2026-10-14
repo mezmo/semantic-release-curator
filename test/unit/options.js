@@ -605,10 +605,10 @@ test('normalize() keeps an anthropic base url away from bedrock', async (t) => {
 
 test('normalize() reads a falsey verbose env var as off', async (t) => {
   for (const value of ['false', '0', 'no', 'off', '']) {
-    const {verbose} = normalize({}, {env: {AUDIENCE_NOTES_VERBOSE: value}})
+    const {verbose} = normalize({}, {env: {SEMANTIC_RELEASE_CURATOR_VERBOSE: value}})
     t.notOk(verbose, value || '(empty)')
   }
-  t.ok(normalize({}, {env: {AUDIENCE_NOTES_VERBOSE: '1'}}).verbose)
+  t.ok(normalize({}, {env: {SEMANTIC_RELEASE_CURATOR_VERBOSE: '1'}}).verbose)
 })
 
 test('normalize() takes introspect.exclude as a string or a list', async (t) => {

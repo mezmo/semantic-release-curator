@@ -1,26 +1,27 @@
-# audience-notes CLI
+# semantic-release-curator CLI
 
-`audience-notes` renders the release notes this plugin would write for any commit range, without
-running a release, tagging, or touching the target repository's config. It runs the same
-`generateNotes` code path semantic-release would. The agent's wording varies from run to run,
-so it shows the kind of notes a release would publish rather than the exact text.
+`semantic-release-curator` renders the release notes this plugin would write for any commit
+range, without running a release, tagging, or touching the target repository's config. It runs
+the same `generateNotes` code path semantic-release would. The agent's wording varies from run
+to run, so it shows the kind of notes a release would publish rather than the exact text.
 
 ## Running it
 
 Without installing:
 
 ```sh
-npx -p @mezmoinc/semantic-release-audience-notes audience-notes --from v1.4.0
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0
 ```
 
-After `npm install --save-dev @mezmoinc/semantic-release-audience-notes`:
+After `npm install --save-dev @mezmoinc/semantic-release-curator`:
 
 ```sh
-npx audience-notes --from v1.4.0
+npx semantic-release-curator --from v1.4.0
 ```
 
-Always name the package with `-p` unless it is installed. A bare `npx audience-notes` in a
-project without it asks npm for an unrelated package called `audience-notes`.
+Always name the package with `-p` unless it is installed. Without it, a bare
+`npx semantic-release-curator` looks for an unscoped package of that name instead of
+`@mezmoinc/semantic-release-curator`.
 
 Requires Node `^22.14.0 || >=24.10.0` and `git` on the `PATH`.
 
@@ -28,13 +29,13 @@ Requires Node `^22.14.0 || >=24.10.0` and `git` on the `PATH`.
 
 ```sh
 # 1. Check the range and the config. No model call, no cost.
-npx audience-notes --from v1.4.0 --json
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0 --json
 
 # 2. Render the notes for everything since v1.4.0.
-npx audience-notes --from v1.4.0 --audience operators
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0 --audience operators
 
 # 3. Save them.
-npx audience-notes --from v1.4.0 --audience operators > NOTES.md
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0 --audience operators > NOTES.md
 ```
 
 ## What it reads
@@ -102,7 +103,7 @@ module with a default export, or a CommonJS module that sets `module.exports`. N
 are ignored.
 
 ```js
-// audience-notes.config.mjs
+// semantic-release-curator.config.mjs
 export default {
   preset: 'keepachangelog'
 , audience: 'operators'
@@ -116,7 +117,7 @@ export default {
 ```
 
 ```sh
-npx audience-notes --from v1.4.0 --config audience-notes.config.mjs
+npx semantic-release-curator --from v1.4.0 --config semantic-release-curator.config.mjs
 ```
 
 - The path resolves against the directory you run the command from, not `--cwd`.
@@ -137,17 +138,17 @@ Every option the file can set is in [OPTIONS.md](OPTIONS.md).
 | `bedrock` | A region, AWS credentials allowed `bedrock-mantle:CreateInference`, model access, and `@anthropic-ai/bedrock-sdk` |
 
 ```sh
-ANTHROPIC_API_KEY=sk-ant-... npx audience-notes --from v1.4.0
+ANTHROPIC_API_KEY=sk-ant-... npx semantic-release-curator --from v1.4.0
 
-AWS_PROFILE=my-profile npx audience-notes --from v1.4.0 --provider bedrock --region us-east-1
+AWS_PROFILE=my-profile npx semantic-release-curator --from v1.4.0 --provider bedrock --region us-east-1
 ```
 
 The Bedrock SDK is an optional dependency, so `npx -p` does not fetch it. Name it as a
 second package when running without an install:
 
 ```sh
-npx -p @mezmoinc/semantic-release-audience-notes -p @anthropic-ai/bedrock-sdk \
-  audience-notes --from v1.4.0 --provider bedrock --region us-east-1
+npx -p @mezmoinc/semantic-release-curator -p @anthropic-ai/bedrock-sdk \
+  semantic-release-curator --from v1.4.0 --provider bedrock --region us-east-1
 ```
 
 Other environment variables the CLI honors:
@@ -156,7 +157,7 @@ Other environment variables the CLI honors:
 |---|---|
 | `ANTHROPIC_BASE_URL` | Sends first-party requests to a gateway; ignored under Bedrock |
 | `AWS_REGION`, `AWS_DEFAULT_REGION` | Region when `--region` is not given |
-| `AUDIENCE_NOTES_VERBOSE` | Same as `--verbose`; `0`, `false`, `no` and `off` leave it off |
+| `SEMANTIC_RELEASE_CURATOR_VERBOSE` | Same as `--verbose`; `0`, `false`, `no` and `off` leave it off |
 
 `--json` never calls the model, so it runs without credentials.
 
@@ -232,8 +233,8 @@ as strings such as `"/^wip/i"`. `commits` is what git returned, before parsing, 
 rules, or revert filtering. Without a key, `--json` warns that a run would fail.
 
 ```sh
-npx audience-notes --from v1.4.0 --json | jq '.commits | length'
-npx audience-notes --from v1.4.0 --json | jq '.options.sections | map(.title)'
+npx semantic-release-curator --from v1.4.0 --json | jq '.commits | length'
+npx semantic-release-curator --from v1.4.0 --json | jq '.options.sections | map(.title)'
 ```
 
 ## Exit codes
@@ -258,39 +259,39 @@ Render the next release from the latest tag. In a repository with no tags yet, t
 `--from` renders a first release:
 
 ```sh
-npx audience-notes --from "$(git describe --tags --abbrev=0 2>/dev/null)"
+npx semantic-release-curator --from "$(git describe --tags --abbrev=0 2>/dev/null)"
 ```
 
 Render one package of a monorepo:
 
 ```sh
-npx audience-notes --cwd packages/api --from api-v2.3.0
+npx semantic-release-curator --cwd packages/api --from api-v2.3.0
 ```
 
 Re-render a past release with its own version in the heading:
 
 ```sh
-npx audience-notes --from v1.4.0 --to v1.5.0
+npx semantic-release-curator --from v1.4.0 --to v1.5.0
 ```
 
 Read another checkout without changing directory:
 
 ```sh
-npx audience-notes --cwd ../service --from v2.3.0 --audience operators
+npx semantic-release-curator --cwd ../service --from v2.3.0 --audience operators
 ```
 
 Compare two audiences on the same range:
 
 ```sh
-npx audience-notes --from v1.4.0 --audience developers > developers.md
-npx audience-notes --from v1.4.0 --audience support > support.md
+npx semantic-release-curator --from v1.4.0 --audience developers > developers.md
+npx semantic-release-curator --from v1.4.0 --audience support > support.md
 ```
 
 Check what a cheaper run loses:
 
 ```sh
-npx audience-notes --from v1.4.0 --effort low > low.md
-npx audience-notes --from v1.4.0 --effort high > high.md
+npx semantic-release-curator --from v1.4.0 --effort low > low.md
+npx semantic-release-curator --from v1.4.0 --effort high > high.md
 ```
 
 ## Differences from a real release
@@ -320,4 +321,4 @@ npx audience-notes --from v1.4.0 --effort high > high.md
 | ``warn: `preset` is "…", which this plugin does not have`` | `--preset` names no preset, so the notes use `conventional` | Use `conventional` or `keepachangelog` |
 | No links in the notes | The repository has no `origin` remote | Add one, or set `releaseOptions.repositoryUrl` |
 | Issue keys are not linked or parsed | The parser does not know your prefixes | Pass the release config's `parserOpts` through `releaseOptions` |
-| `npx` offers to install `audience-notes` | The package is not installed locally | Use `npx -p @mezmoinc/semantic-release-audience-notes audience-notes` |
+| `npx` offers to install `semantic-release-curator` | The package is not installed locally | Use `npx -p @mezmoinc/semantic-release-curator semantic-release-curator` |

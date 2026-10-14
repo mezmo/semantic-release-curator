@@ -12,7 +12,7 @@ import {normalize} from '../../lib/options.js'
 const run = promisify(execFile)
 
 async function makeRepo(t) {
-  const cwd = await mkdtemp(path.join(tmpdir(), 'audience-notes-detail-'))
+  const cwd = await mkdtemp(path.join(tmpdir(), 'curator-detail-'))
   t.teardown(() => { return rm(cwd, {recursive: true, force: true}) })
 
   await run('git', ['init', '--quiet', '-b', 'main'], {cwd})

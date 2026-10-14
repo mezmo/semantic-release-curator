@@ -1,4 +1,4 @@
-# semantic-release-audience-notes
+# semantic-release-curator
 
 Drop-in replacement for [`@semantic-release/release-notes-generator`][rng] that writes
 human-readable, audience-targeted release notes. An agent navigates the repository, decides
@@ -9,7 +9,7 @@ and drops the noise.
   plugins: [
     ['@semantic-release/commit-analyzer', {}]
 - , ['@semantic-release/release-notes-generator', {}]
-+ , ['@mezmoinc/semantic-release-audience-notes', {audience: 'operators'}]
++ , ['@mezmoinc/semantic-release-curator', {audience: 'operators'}]
   , ['@semantic-release/changelog', {}]
   ]
 ```
@@ -37,15 +37,15 @@ The layout is exactly what release-notes-generator writes. Only the words are di
 
 ## CLI
 
-`audience-notes` renders the notes for any commit range without running a release. It runs the
-same code a release would, though the agent's wording varies from run to run.
+`semantic-release-curator` renders the notes for any commit range without running a release.
+It runs the same code a release would, though the agent's wording varies from run to run.
 
 ```sh
 # Check the range and the config. No model call, no cost.
-npx -p @mezmoinc/semantic-release-audience-notes audience-notes --from v1.4.0 --json
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0 --json
 
 # Render the notes for everything since v1.4.0.
-npx -p @mezmoinc/semantic-release-audience-notes audience-notes --from v1.4.0 --audience operators
+npx -p @mezmoinc/semantic-release-curator semantic-release-curator --from v1.4.0 --audience operators
 ```
 
 Run it from the repository root. A real run needs `ANTHROPIC_API_KEY`, or
@@ -103,7 +103,7 @@ For a [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) document, with th
 heading and its six sections:
 
 ```js
-['@mezmoinc/semantic-release-audience-notes', {preset: 'keepachangelog', audience: 'developers'}]
+['@mezmoinc/semantic-release-curator', {preset: 'keepachangelog', audience: 'developers'}]
 ```
 
 Upgrade notes and For contributors are not in the spec. Add either with `extraSections`, as
@@ -210,7 +210,7 @@ Within a section, entries sort by scope, with unscoped entries last, then by hea
 ## Install
 
 ```sh
-npm install --save-dev @mezmoinc/semantic-release-audience-notes
+npm install --save-dev @mezmoinc/semantic-release-curator
 ```
 
 Requires Node `^22.14.0 || >=24.10.0`, the same as semantic-release 25, and a git repository.
@@ -225,7 +225,7 @@ export default {
   branches: ['main']
 , plugins: [
     ['@semantic-release/commit-analyzer', {}]
-  , ['@mezmoinc/semantic-release-audience-notes', {audience: 'operators'}]
+  , ['@mezmoinc/semantic-release-curator', {audience: 'operators'}]
   , ['@semantic-release/changelog', {changelogTitle: '## Changelog'}]
   , ['@semantic-release/github', {}]
   ]
@@ -252,7 +252,7 @@ Runs against the first-party Anthropic API by default, or Amazon Bedrock if that
 your Claude access already lives.
 
 ```js
-['@mezmoinc/semantic-release-audience-notes', {
+['@mezmoinc/semantic-release-curator', {
   provider: 'bedrock'
 , region: 'us-east-1'      // or AWS_REGION in the environment
 }]
@@ -328,8 +328,8 @@ against a past release.
 
 ### Debugging a run
 
-`verbose: true`, or `AUDIENCE_NOTES_VERBOSE`, or `--verbose`, logs one line per turn, tool call
-and submission attempt:
+`verbose: true`, or `SEMANTIC_RELEASE_CURATOR_VERBOSE`, or `--verbose`, logs one line per
+turn, tool call and submission attempt:
 
 ```
 turn 1: stop=tool_use in=25013 out=412

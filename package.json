@@ -1,5 +1,5 @@
 {
-  "name": "@mezmoinc/semantic-release-audience-notes",
+  "name": "@mezmoinc/semantic-release-curator",
   "version": "1.0.0",
   "description": "Drop-in replacement for @semantic-release/release-notes-generator that writes human-readable, audience-targeted release notes with Claude",
   "keywords": [
@@ -13,12 +13,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mezmo/semantic-release-audience-notes.git"
+    "url": "git+https://github.com/mezmo/semantic-release-curator.git"
   },
   "bugs": {
-    "url": "https://github.com/mezmo/semantic-release-audience-notes/issues"
+    "url": "https://github.com/mezmo/semantic-release-curator/issues"
   },
-  "homepage": "https://github.com/mezmo/semantic-release-audience-notes#readme",
+  "homepage": "https://github.com/mezmo/semantic-release-curator#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -100,7 +100,7 @@
     "functions": 100
   },
   "bin": {
-    "audience-notes": "./bin/audience-notes.js"
+    "semantic-release-curator": "./bin/semantic-release-curator.js"
   },
   "peerDependenciesMeta": {
     "@anthropic-ai/bedrock-sdk": {

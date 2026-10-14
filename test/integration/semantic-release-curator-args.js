@@ -163,7 +163,7 @@ test('a ref that names no commit fails before any work', async (t) => {
 })
 
 test('--cwd has to be a directory inside a repository', async (t) => {
-  const plain = await mkdtemp(path.join(tmpdir(), 'audience-notes-plain-'))
+  const plain = await mkdtemp(path.join(tmpdir(), 'curator-plain-'))
   t.teardown(() => { return rm(plain, {recursive: true, force: true}) })
 
   const missing = await cli(['--cwd', path.join(plain, 'servce')])
