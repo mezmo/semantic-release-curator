@@ -125,7 +125,7 @@ BREAKING CHANGE: The `extraSections` option has been renamed to `optionalSection
 Update your release config accordingly.
 
 Fixes: #1
-See: https://github.com/mezmo/semantic-release-audience-notes/discussions/1
+See: https://github.com/mezmo/semantic-release-curator/discussions/1
 ```
 
 ### Important Notes
@@ -145,5 +145,5 @@ The easiest way to get our attention is to comment on an existing, or open a new
 [commitlint]: https://commitlint.js.org
 [eslint-config-logdna]: https://github.com/logdna/eslint-config-logdna
 [commitlint-config]: https://github.com/mezmo/commitlint-config
-[issue]: https://github.com/mezmo/semantic-release-audience-notes/issues
+[issue]: https://github.com/mezmo/semantic-release-curator/issues
 [Conventional Commits]: https://www.conventionalcommits.org/

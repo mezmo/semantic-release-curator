@@ -1,6 +1,6 @@
 library 'magic-butler-catalogue'
 
-def PROJECT_NAME = "semantic-release-audience-notes"
+def PROJECT_NAME = "semantic-release-curator"
 def DEFAULT_BRANCH = 'main'
 def TRIGGER_PATTERN = ".*@triggerbuild.*"
 def BUILD_SLUG = slugify(env.BUILD_TAG)

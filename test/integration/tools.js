@@ -14,7 +14,7 @@ import {signCommits} from '../fixtures/signed.js'
 const run = promisify(execFile)
 
 async function makeRepo(t) {
-  const cwd = await mkdtemp(path.join(tmpdir(), 'audience-notes-'))
+  const cwd = await mkdtemp(path.join(tmpdir(), 'curator-'))
   t.teardown(() => { return rm(cwd, {recursive: true, force: true}) })
 
   await run('git', ['init', '--quiet', '-b', 'main'], {cwd})

@@ -4,7 +4,7 @@ Every option goes in the plugin's entry in the release config. The CLI accepts t
 options through `--config`, and a few through flags (see [CLI.md](CLI.md#flags)).
 
 ```js
-['@mezmoinc/semantic-release-audience-notes', {audience: 'operators', effort: 'medium'}]
+['@mezmoinc/semantic-release-curator', {audience: 'operators', effort: 'medium'}]
 ```
 
 Defaults marked *per effort* or *per preset* are listed in the tables at the end.
@@ -87,7 +87,7 @@ The names in this group match release-notes-generator's, so its config carries o
 
 | Option | Default | Purpose |
 |---|---|---|
-| `verbose` | `$AUDIENCE_NOTES_VERBOSE` | Log every turn, tool call and submission |
+| `verbose` | `$SEMANTIC_RELEASE_CURATOR_VERBOSE` | Log every turn, tool call and submission |
 | `extraGuidance` | `''` | Extra text appended to the system prompt |
 
 ## Audience presets

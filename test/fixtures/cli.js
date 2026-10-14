@@ -7,7 +7,7 @@ import path from 'node:path'
 
 const run = promisify(execFile)
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const CLI = path.join(ROOT, 'bin/audience-notes.js')
+const CLI = path.join(ROOT, 'bin/semantic-release-curator.js')
 const SECRET = 'sk-ant-test-value-that-must-never-be-printed'
 
 // The published binary has no exports, so the only honest way to test it is to
@@ -42,7 +42,7 @@ async function commit(cwd, files, message) {
 
 // Tagged v1.0.0 at a seed commit, with one feature commit after it.
 async function makeRepo(t, {origin = true} = {}) {
-  const cwd = await mkdtemp(path.join(tmpdir(), 'audience-notes-cli-'))
+  const cwd = await mkdtemp(path.join(tmpdir(), 'curator-cli-'))
   t.teardown(() => { return rm(cwd, {recursive: true, force: true}) })
 
   await run('git', ['init', '--quiet', '-b', 'main'], {cwd})

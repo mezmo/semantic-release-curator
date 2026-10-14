@@ -7,6 +7,8 @@ import {generateNotes} from '../index.js'
 import {
   DEFAULT_PRESET
 , EFFORT_LEVELS
+, PACKAGE_NAME
+, PLUGIN_NAME
 , PRESETS
 , PRESET_ALIASES
 , PROVIDERS
@@ -51,7 +53,8 @@ function usage() {
   return [
     'Render the release notes this plugin would write, without running a release.'
   , ''
-  , '  npx audience-notes --cwd <repo> --from <ref> [--to <ref>] [options]'
+  , `  npx -p ${PACKAGE_NAME} ${PLUGIN_NAME} \\`
+  , '    --cwd <repo> --from <ref> [--to <ref>] [options]'
   , ''
   , 'Options'
   , row('--from <ref>', 'Previous release, excluded', 'none, so every commit')

@@ -11,7 +11,7 @@ import {verifyConditions} from '../../lib/verify-conditions.js'
 const run = promisify(execFile)
 
 async function makeRepo(t) {
-  const cwd = await mkdtemp(path.join(tmpdir(), 'audience-notes-verify-'))
+  const cwd = await mkdtemp(path.join(tmpdir(), 'curator-verify-'))
   t.teardown(() => { return rm(cwd, {recursive: true, force: true}) })
   await run('git', ['init', '--quiet', '-b', 'main'], {cwd})
   return cwd

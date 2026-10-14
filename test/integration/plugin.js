@@ -18,7 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 // `tag` tags the first commit as v1.0.0, so the commits after it make a minor or
 // patch release instead of a first one. `env` reaches semantic-release as given.
 async function makeRelease(t, commits, {tag = false, env: extra = {}} = {}) {
-  const root = await mkdtemp(path.join(tmpdir(), 'audience-notes-plugin-'))
+  const root = await mkdtemp(path.join(tmpdir(), 'curator-plugin-'))
   t.teardown(() => { return rm(root, {recursive: true, force: true}) })
 
   const cwd = path.join(root, 'repo')

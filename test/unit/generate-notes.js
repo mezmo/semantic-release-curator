@@ -1,7 +1,7 @@
 import {test} from 'tap'
 
 import {createGenerateNotes} from '../../lib/generate-notes.js'
-import {AudienceNotesError} from '../../lib/error.js'
+import {CuratorError} from '../../lib/error.js'
 import {resolve} from '../../lib/submission.js'
 
 function makeContext(overrides = {}) {
@@ -459,7 +459,7 @@ test('generateNotes() reports an SDK failure as a plugin error', async (t) => {
 
 test('generateNotes() leaves an error that already carries the contract', async (t) => {
   // Wrapping one of ours would bury the code that names the actual problem.
-  const mine = new AudienceNotesError('ETIMEOUT', 'The agent ran out of time.')
+  const mine = new CuratorError('ETIMEOUT', 'The agent ran out of time.')
   const exploding = {describe() { throw mine }}
 
   const err = await build(exploding)({}, makeContext()).catch((e) => { return e })
