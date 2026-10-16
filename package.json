@@ -61,7 +61,7 @@
     "minimatch": "^10.0.1"
   },
   "devDependencies": {
-    "@anthropic-ai/bedrock-sdk": "^0.33.5",
+    "@anthropic-ai/bedrock-sdk": "^0.34.4",
     "@mezmoinc/commitlint-config": "^1.1.1",
     "@mezmoinc/release-config-core": "^2.0.1",
     "@semantic-release/release-notes-generator": "^14.1.1",
@@ -74,7 +74,7 @@
   },
   "peerDependencies": {
     "semantic-release": ">=24.0.0",
-    "@anthropic-ai/bedrock-sdk": "^0.33.5"
+    "@anthropic-ai/bedrock-sdk": "^0.34.4"
   },
   "tap": {
     "coverage-report": [
